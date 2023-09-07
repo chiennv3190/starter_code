@@ -101,6 +101,11 @@ public class UserController {
 				|| !createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
 			throw new BusinessLogicException("Error create user: Confirm Password doesn't match Password");
 		}
+		
+		if (userRepository.findByUsername(createUserRequest.getUsername()) != null) {
+			throw new BusinessLogicException("Error create user: Username exists");
+		}
+		
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
 		user.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
