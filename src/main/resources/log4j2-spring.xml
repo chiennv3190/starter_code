@@ -21,6 +21,20 @@
                 <TimeBasedTriggeringPolicy />
             </Policies>
         </RollingFile>
+        
+        <SplunkHttp
+                name="splunkhttp"
+                url="http://localhost:8088"
+                token="9f01c493-818d-479e-910a-075640ab8550"
+                host="localhost"
+                index="udacity_api_dev"
+                type="raw"
+                source="http-event-logs"
+                sourcetype="log4j"
+                messageFormat="text"
+                disableCertificateValidation="true">
+            <PatternLayout pattern="%m" />
+        </SplunkHttp>
     </Appenders>
 
     <Loggers>
@@ -28,6 +42,7 @@
         <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingFile" />
+            <AppenderRef ref="splunkhttp" />
         </Root>
 
         <!-- LOG "com.baeldung*" at TRACE level -->

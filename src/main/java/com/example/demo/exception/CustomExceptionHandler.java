@@ -15,14 +15,12 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> handleException(Exception e) {
 		
-		logger.error("SYSTEM ERROR: " + e.getMessage());
+		logger.error("SYSTEM ERROR: " , e.getMessage());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("SYSTEM ERROR: " + e.getMessage());
 	}
 	
 	@ExceptionHandler(BusinessLogicException.class)
 	public ResponseEntity<?> handleBusinessLogicException(BusinessLogicException e) {
-		
-		logger.error("BUSINESS ERROR: " + e.getMessage());
 		return ResponseEntity.badRequest().body("BUSINESS ERROR: " + e.getMessage()); 
 	}
 	

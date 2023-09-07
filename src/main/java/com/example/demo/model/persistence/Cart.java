@@ -41,6 +41,9 @@ public class Cart {
 	@JsonProperty
 	private BigDecimal total;
 	
+	public Cart() {
+	}
+
 	public BigDecimal getTotal() {
 		return total;
 	}

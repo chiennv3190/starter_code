@@ -92,18 +92,21 @@ public class UserController {
 		
 		logger.info("Start create user");
 		if (!StringUtils.hasText(createUserRequest.getUsername())) {
-			throw new BusinessLogicException("Error create user: Username is mandatory");
+			logger.error("Username is mandatory");
+			throw new BusinessLogicException("Username is mandatory");
 		} else if (!StringUtils.hasText(createUserRequest.getPassword())) {
-			throw new BusinessLogicException("Error create user: Password is mandatory");
+			logger.error("Password is mandatory");
+			throw new BusinessLogicException("Password is mandatory");
 		} else if (createUserRequest.getPassword().getBytes().length < 8 || createUserRequest.getPassword().getBytes().length > 16) {
-			throw new BusinessLogicException("Error create user: Password has a length of 8 to 16 characters");
+			logger.error("Password has a length of 8 to 16 characters");
+			throw new BusinessLogicException("Password has a length of 8 to 16 characters");
 		} else if (!StringUtils.hasText(createUserRequest.getConfirmPassword()) 
 				|| !createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
-			throw new BusinessLogicException("Error create user: Confirm Password doesn't match Password");
-		}
-		
-		if (userRepository.findByUsername(createUserRequest.getUsername()) != null) {
-			throw new BusinessLogicException("Error create user: Username exists");
+			logger.error("Confirm Password doesn't match Password");
+			throw new BusinessLogicException("Confirm Password doesn't match Password");
+		} else if (userRepository.findByUsername(createUserRequest.getUsername()) != null) {
+			logger.error("Username exists");
+			throw new BusinessLogicException("Username exists");
 		}
 		
 		User user = new User();

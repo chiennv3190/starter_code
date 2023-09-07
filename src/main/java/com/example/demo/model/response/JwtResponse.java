@@ -4,6 +4,10 @@ public class JwtResponse {
 
 	private String jwttoken;
 
+	
+	public JwtResponse() {
+	}
+
 	public JwtResponse(String jwttoken) {
 		this.jwttoken = jwttoken;
 	}
